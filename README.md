@@ -7,5 +7,5 @@ Maker Media GmbH
 # Node-RED-Special
 Software zu den Heftprojekten und Beispielen
 
-![Picture](https://github.com/MakeMagazinDE/Node-RED-Special/node-red-cover.png)
+![Picture](https://github.com/MakeMagazinDE/Node-RED-Special/blob/master/node-red-cover.png)
 
