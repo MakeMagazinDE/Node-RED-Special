@@ -1,0 +1,97 @@
+[
+    {
+        "id": "9746dbb8.c1b5",
+        "type": "tab",
+        "label": "E-Mail-Alarm",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3d306a26.406206",
+        "type": "e-mail",
+        "z": "9746dbb8.c1b5",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "E-Mail senden",
+        "x": 800,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d1d54d49.774138",
+        "type": "switch",
+        "z": "9746dbb8.c1b5",
+        "name": "Temperatur prüfen",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "7",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 680,
+        "y": 360,
+        "wires": [
+            [
+                "3d306a26.406206"
+            ]
+        ]
+    },
+    {
+        "id": "44cf4674.eeee38",
+        "type": "mqtt in",
+        "z": "9746dbb8.c1b5",
+        "name": "",
+        "topic": "Temperatur/Kühlschrank",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ff2bd14a.a82d08",
+        "x": 550,
+        "y": 280,
+        "wires": [
+            [
+                "d1d54d49.774138"
+            ]
+        ]
+    },
+    {
+        "id": "f205d991.8bc5c",
+        "type": "comment",
+        "z": "9746dbb8.c1b5",
+        "name": "Ein E-Mail-Alarm für heiße Tage.",
+        "info": "",
+        "x": 570,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "ff2bd14a.a82d08",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "Raspi",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
