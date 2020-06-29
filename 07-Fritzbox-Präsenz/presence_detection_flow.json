@@ -1,0 +1,171 @@
+[
+    {
+        "id": "cb5b1a9d.c8e018",
+        "type": "tab",
+        "label": "Präsenzerkennung",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "21a0eb60.50b74c",
+        "type": "fritzbox-in",
+        "z": "cb5b1a9d.c8e018",
+        "device": "fb6b142c.7c071",
+        "name": "Handy im Netz?",
+        "service": "urn:dslforum-org:service:Hosts:1",
+        "action": "GetSpecificHostEntry",
+        "arguments": "{\"NewMACAddress\":\"value\"}",
+        "x": 400,
+        "y": 300,
+        "wires": [
+            [
+                "f4538741.b13d88",
+                "6422f699.5a788"
+            ]
+        ]
+    },
+    {
+        "id": "f4538741.b13d88",
+        "type": "debug",
+        "z": "cb5b1a9d.c8e018",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 650,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "1c1db93f.068377",
+        "type": "inject",
+        "z": "cb5b1a9d.c8e018",
+        "name": "Mein Handy",
+        "topic": "",
+        "payload": "{\"NewMACAddress\": \"DE:AD:BE:EF:08:15\"}",
+        "payloadType": "json",
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "5",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "21a0eb60.50b74c"
+            ]
+        ]
+    },
+    {
+        "id": "24ff6bf5.20a784",
+        "type": "change",
+        "z": "cb5b1a9d.c8e018",
+        "name": "Bin zuhause!",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Bin zuhause!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "9104346c.330ec8"
+            ]
+        ]
+    },
+    {
+        "id": "6422f699.5a788",
+        "type": "switch",
+        "z": "cb5b1a9d.c8e018",
+        "name": "",
+        "property": "payload.NewActive",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 260,
+        "wires": [
+            [
+                "24ff6bf5.20a784"
+            ],
+            [
+                "76424c91.0d74fc"
+            ]
+        ]
+    },
+    {
+        "id": "76424c91.0d74fc",
+        "type": "change",
+        "z": "cb5b1a9d.c8e018",
+        "name": "Bin dann mal weg!",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Bin dann mal weg!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 300,
+        "wires": [
+            [
+                "9104346c.330ec8"
+            ]
+        ]
+    },
+    {
+        "id": "9104346c.330ec8",
+        "type": "debug",
+        "z": "cb5b1a9d.c8e018",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1080,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "fb6b142c.7c071",
+        "type": "fritzbox-config",
+        "z": "",
+        "name": "7590",
+        "host": "192.168.188.1",
+        "port": "49443",
+        "ssl": true
+    }
+]

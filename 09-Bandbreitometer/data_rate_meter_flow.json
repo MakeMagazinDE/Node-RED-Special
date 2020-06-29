@@ -1,0 +1,182 @@
+[
+    {
+        "id": "3b62e59c.2c451a",
+        "type": "tab",
+        "label": "DatenRateAnzeige",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4bde10ba.42b5d",
+        "type": "fritzbox-in",
+        "z": "3b62e59c.2c451a",
+        "device": "fb6b142c.7c071",
+        "name": "",
+        "service": "urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1",
+        "action": "GetAddonInfos",
+        "arguments": "{}",
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "690dce94.f3b998",
+                "18f3338b.aa88bc"
+            ]
+        ]
+    },
+    {
+        "id": "690dce94.f3b998",
+        "type": "debug",
+        "z": "3b62e59c.2c451a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 490,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "661a48f0.64758",
+        "type": "inject",
+        "z": "3b62e59c.2c451a",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 120,
+        "y": 320,
+        "wires": [
+            [
+                "4bde10ba.42b5d"
+            ]
+        ]
+    },
+    {
+        "id": "f0002de0.98b1d8",
+        "type": "debug",
+        "z": "3b62e59c.2c451a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 730,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "18f3338b.aa88bc",
+        "type": "change",
+        "z": "3b62e59c.2c451a",
+        "name": "Download-Rate",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(payload.NewByteReceiveRate)\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 320,
+        "wires": [
+            [
+                "f0002de0.98b1d8",
+                "8608bf56.570908"
+            ]
+        ]
+    },
+    {
+        "id": "8608bf56.570908",
+        "type": "range",
+        "z": "3b62e59c.2c451a",
+        "minin": "0",
+        "maxin": "6553600",
+        "minout": "0",
+        "maxout": "100",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "Auslastung (%)",
+        "x": 740,
+        "y": 320,
+        "wires": [
+            [
+                "7aaf2d49.35ebc4",
+                "b67d7494.a0a078"
+            ]
+        ]
+    },
+    {
+        "id": "7aaf2d49.35ebc4",
+        "type": "debug",
+        "z": "3b62e59c.2c451a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 970,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b67d7494.a0a078",
+        "type": "mqtt out",
+        "z": "3b62e59c.2c451a",
+        "name": "",
+        "topic": "stats/download-data-rate",
+        "qos": "",
+        "retain": "",
+        "broker": "ff2bd14a.a82d08",
+        "x": 1010,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "fb6b142c.7c071",
+        "type": "fritzbox-config",
+        "z": "",
+        "name": "7590",
+        "host": "192.168.188.1",
+        "port": "49443",
+        "ssl": true
+    },
+    {
+        "id": "ff2bd14a.a82d08",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "Raspi",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]

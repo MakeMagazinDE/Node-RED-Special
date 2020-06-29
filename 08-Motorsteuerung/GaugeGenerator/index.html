@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+    <canvas data-type="radial-gauge"
+        data-width="600"
+        data-height="600"
+        data-units="°C"
+        data-min-value="-10"
+        data-max-value="45"
+        data-start-angle="90"
+        data-ticks-angle="180"
+        data-value-box="false"
+        data-major-ticks="-10,-5,0,5,10,15,20,25,30,35,40,45"
+        data-minor-ticks="2"
+        data-stroke-ticks="true"
+        data-highlights='[
+            {"from": 30, "to": 45, "color": "rgba(200, 50, 50, .75)"}
+        ]'
+        data-color-plate="#fff"
+        data-border-shadow-width="0"
+        data-borders="false"
+        data-needle-type="none"
+        data-needle-width="0"
+        data-needle-circle-size="2"
+        data-needle-circle-outer="true"
+        data-needle-circle-inner="false"
+    ></canvas>    
+    <script src='gauge.min.js'></script> 
+  </body>
+</html>

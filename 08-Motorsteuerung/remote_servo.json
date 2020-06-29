@@ -1,0 +1,177 @@
+[
+    {
+        "id": "dffe77ba.d1438",
+        "type": "tab",
+        "label": "OpenWeatherServo",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d2775d50.040368",
+        "type": "mqtt out",
+        "z": "dffe77ba.d1438",
+        "name": "",
+        "topic": "Servo",
+        "qos": "",
+        "retain": "",
+        "broker": "ff2bd14a.a82d08",
+        "x": 1010,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "f6707847.8b753",
+        "type": "http request",
+        "z": "dffe77ba.d1438",
+        "name": "OpenWeather",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "http://api.openweathermap.org/data/2.5/weather?q=Hannover,de&units=metric&lang=de&APPID=HIER API-KEY EINFÜGEN",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 300,
+        "y": 600,
+        "wires": [
+            [
+                "23edfcc.40fa584",
+                "6cc3ed2.48e2b14"
+            ]
+        ]
+    },
+    {
+        "id": "23edfcc.40fa584",
+        "type": "debug",
+        "z": "dffe77ba.d1438",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 550,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "2ed0fc59.41911c",
+        "type": "inject",
+        "z": "dffe77ba.d1438",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 100,
+        "y": 599,
+        "wires": [
+            [
+                "f6707847.8b753"
+            ]
+        ]
+    },
+    {
+        "id": "5d38e3e4.396e94",
+        "type": "debug",
+        "z": "dffe77ba.d1438",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 790,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "6cc3ed2.48e2b14",
+        "type": "change",
+        "z": "dffe77ba.d1438",
+        "name": "Temperatur ermitteln",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.temp",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 600,
+        "wires": [
+            [
+                "5d38e3e4.396e94",
+                "75fd318f.85e4a"
+            ]
+        ]
+    },
+    {
+        "id": "75fd318f.85e4a",
+        "type": "range",
+        "z": "dffe77ba.d1438",
+        "minin": "-10",
+        "maxin": "45",
+        "minout": "0",
+        "maxout": "170",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "",
+        "x": 780,
+        "y": 600,
+        "wires": [
+            [
+                "d2775d50.040368",
+                "d3376b1.baa1218"
+            ]
+        ]
+    },
+    {
+        "id": "d3376b1.baa1218",
+        "type": "debug",
+        "z": "dffe77ba.d1438",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1030,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "ff2bd14a.a82d08",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "Raspi",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
