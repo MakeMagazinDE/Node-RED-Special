@@ -1,0 +1,43 @@
+[
+    {
+        "id": "86284511.589b88",
+        "type": "tab",
+        "label": "Hello, World!",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5834a6d1.11d8",
+        "type": "inject",
+        "z": "86284511.589b88",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 200,
+        "y": 280,
+        "wires": [
+            [
+                "6f032c96.41eedc"
+            ]
+        ]
+    },
+    {
+        "id": "6f032c96.41eedc",
+        "type": "debug",
+        "z": "86284511.589b88",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 450,
+        "y": 280,
+        "wires": []
+    }
+]

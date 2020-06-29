@@ -1,0 +1,62 @@
+[
+    {
+        "id": "82386d6c.85b9d",
+        "type": "tab",
+        "label": "Empfange MQTT-Nachricht",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b90b8c65.a0b5e8",
+        "type": "mqtt in",
+        "z": "82386d6c.85b9d",
+        "name": "",
+        "topic": "home/MQTT-Test",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ff2bd14a.a82d08",
+        "x": 490,
+        "y": 440,
+        "wires": [
+            [
+                "36acefc1.7a83b8"
+            ]
+        ]
+    },
+    {
+        "id": "36acefc1.7a83b8",
+        "type": "debug",
+        "z": "82386d6c.85b9d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 770,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "ff2bd14a.a82d08",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "Raspi",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]

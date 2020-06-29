@@ -1,0 +1,59 @@
+[
+    {
+        "id": "86284511.589b88",
+        "type": "tab",
+        "label": "Hello, World!",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5834a6d1.11d8",
+        "type": "inject",
+        "z": "86284511.589b88",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "92a22ac0.b210e8"
+            ]
+        ]
+    },
+    {
+        "id": "6f032c96.41eedc",
+        "type": "debug",
+        "z": "86284511.589b88",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 590,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "92a22ac0.b210e8",
+        "type": "function",
+        "z": "86284511.589b88",
+        "name": "Zeitstempel formatieren",
+        "func": "const timestamp = new Date(msg.payload);\nconst year = timestamp.getFullYear();\nlet month = timestamp.getMonth();\nmonth = (month < 9 ? '0' : '') + (month + 1)\nlet day = timestamp.getDate();\nday = (day < 10 ? '0' : '') + day\nmsg.payload = year + '-' + month + '-' + day + ' ';\nmsg.payload += timestamp.toLocaleTimeString();\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 280,
+        "wires": [
+            [
+                "6f032c96.41eedc"
+            ]
+        ]
+    }
+]

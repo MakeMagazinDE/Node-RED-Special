@@ -1,0 +1,240 @@
+[
+    {
+        "id": "801a5ed1.ba55f",
+        "type": "tab",
+        "label": "Zahnhygiene",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "13fcbc14.2dfcf4",
+        "type": "ui_button",
+        "z": "801a5ed1.ba55f",
+        "name": "",
+        "group": "76fda0f0.e72fe",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Habe ich!",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "",
+        "x": 300,
+        "y": 600,
+        "wires": [
+            [
+                "7f6d3377.ec4374"
+            ]
+        ]
+    },
+    {
+        "id": "2c0a5451.4c530c",
+        "type": "comment",
+        "z": "801a5ed1.ba55f",
+        "name": "Zahnseide verwendet?",
+        "info": "",
+        "x": 300,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "7f6d3377.ec4374",
+        "type": "function",
+        "z": "801a5ed1.ba55f",
+        "name": "Zeitstempel formatieren",
+        "func": "const timestamp = new Date(msg.payload);\nconst year = timestamp.getFullYear();\nlet month = timestamp.getMonth();\nmonth = (month < 9 ? '0' : '') + (month + 1)\nlet day = timestamp.getDate();\nday = (day < 10 ? '0' : '') + day\nmsg.payload = month + '/' + day + '/' + year;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 600,
+        "wires": [
+            [
+                "6bda6729.681068",
+                "7d6e5f6b.cb496"
+            ]
+        ]
+    },
+    {
+        "id": "6bda6729.681068",
+        "type": "debug",
+        "z": "801a5ed1.ba55f",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 810,
+        "y": 658,
+        "wires": []
+    },
+    {
+        "id": "7d6e5f6b.cb496",
+        "type": "file",
+        "z": "801a5ed1.ba55f",
+        "name": "",
+        "filename": "/home/pi/zahnseide.txt",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 840,
+        "y": 600,
+        "wires": [
+            [
+                "e2e569ec.6bab9"
+            ]
+        ]
+    },
+    {
+        "id": "e2e569ec.6bab9",
+        "type": "ui_toast",
+        "z": "801a5ed1.ba55f",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "Prima!",
+        "name": "Prima!",
+        "x": 1070,
+        "y": 600,
+        "wires": [
+            [
+                "bb3a842f.d8b2d"
+            ]
+        ]
+    },
+    {
+        "id": "bb3a842f.d8b2d",
+        "type": "file in",
+        "z": "801a5ed1.ba55f",
+        "name": "",
+        "filename": "/home/pi/zahnseide.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 540,
+        "y": 800,
+        "wires": [
+            [
+                "c3a8e634.be5ac"
+            ]
+        ]
+    },
+    {
+        "id": "c3a8e634.be5ac",
+        "type": "function",
+        "z": "801a5ed1.ba55f",
+        "name": "Zähle Tage",
+        "func": "const dates = msg.payload.split(\"\\n\");\nconst today = new Date();\nconst seen = new Set();\nlet count = 0;\nfor (let i = 0; i < dates.length; i++) {\n  if (dates[i] !== \"\" && !seen.has(dates[i])) {\n    seen.add(dates[i]);\n    const diffTime = Math.abs(today - new Date(dates[i]));\n    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));\n    if (diffDays <= 7)\n      count += 1;\n  }\n}\nmsg.payload = count;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 800,
+        "wires": [
+            [
+                "5c4950c7.341d38",
+                "e3fc93ad.a56f8"
+            ]
+        ]
+    },
+    {
+        "id": "5c4950c7.341d38",
+        "type": "debug",
+        "z": "801a5ed1.ba55f",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1050,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "e3fc93ad.a56f8",
+        "type": "ui_gauge",
+        "z": "801a5ed1.ba55f",
+        "name": "Die letzten 7 Tage",
+        "group": "11636f36.9c6931",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "Tage",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "7",
+        "colors": [
+            "#ff0000",
+            "#e6e600",
+            "#00ff00"
+        ],
+        "seg1": "1",
+        "seg2": "3",
+        "x": 1070,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "84fa5e04.fc7cd",
+        "type": "inject",
+        "z": "801a5ed1.ba55f",
+        "name": "",
+        "topic": "",
+        "payload": "Neustart",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "x": 300,
+        "y": 800,
+        "wires": [
+            [
+                "bb3a842f.d8b2d"
+            ]
+        ]
+    },
+    {
+        "id": "76fda0f0.e72fe",
+        "type": "ui_group",
+        "z": "",
+        "name": "Zahnseide verwendet?",
+        "tab": "f6cef20.860111",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "11636f36.9c6931",
+        "type": "ui_group",
+        "z": "",
+        "name": "Statistik",
+        "tab": "f6cef20.860111",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "f6cef20.860111",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
