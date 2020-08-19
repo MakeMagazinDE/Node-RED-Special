@@ -42,6 +42,7 @@ void reconnect() {
 
 void setup() {
   Serial.begin(115200);
+  delay(100);
   if (!bme.begin(0x76)) {
     Serial.println("Konnte keinen BME280-Sensor finden!");
     while (1)
