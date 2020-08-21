@@ -1,4 +1,4 @@
-const Fritzbox = require('Fritzbox');
+const Fritzbox = require('fritzbox');
 
 const options = {
   host: 'fritz.box',
