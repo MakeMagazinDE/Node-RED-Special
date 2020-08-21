@@ -1,9 +1,9 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-const char* SSID = "<SSID des eigenen WLAN>";
-const char* PASSWORD = "<Passwort des eigenen WLAN>";
-const char* MQTT_SERVER = "<IP-Adresse oder Namen des MQTT-Brokers>";
+const char* SSID = "raspberrypi";
+const char* PASSWORD = "pi1234";
+const char* MQTT_SERVER = "home/MQTT-Test";
 const char* MQTT_TOPIC = "home/MQTT-Test";
 const uint16_t MESSAGE_LEN = 50;
 
