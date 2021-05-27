@@ -5,6 +5,8 @@ const char* SSID = "....";
 const char* PASSWORD = "....";
 //const char* MQTT_SERVER = "192.168.188.49";
 const char* MQTT_SERVER = "node-red";
+const char* MQTT_USER = "node-red";
+const char* MQTT_PASS = "node-red";
 const char* MQTT_TOPIC = "home/MQTT-Test";
 const uint16_t MESSAGE_LEN = 50;
 
@@ -30,7 +32,7 @@ void reconnect() {
     Serial.print("Suche den MQTT-Broker...");
     String clientId = "MQTT-Client-" + String(random(0xffff), HEX);
 
-    if (mqttClient.connect(clientId.c_str())) {
+    if (mqttClient.connect(clientId.c_str()), MQTT_USER, MQTT_PASS) {
       Serial.printf("verbunden als %s.\n", clientId.c_str());
       mqttClient.subscribe(MQTT_TOPIC);
     } else {
