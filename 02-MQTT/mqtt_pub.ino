@@ -5,8 +5,8 @@ const char* SSID = "....";
 const char* PASSWORD = "....";
 //const char* MQTT_SERVER = "192.168.188.49";
 const char* MQTT_SERVER = "node-red";
-const char* MQTT_USER = "node-red";
-const char* MQTT_PASS = "node-red";
+const char* MQTT_USER = "mqtt-user";
+const char* MQTT_PASS = "mqtt-pass";
 const char* MQTT_TOPIC = "home/MQTT-Test";
 const uint16_t MESSAGE_LEN = 50;
 
